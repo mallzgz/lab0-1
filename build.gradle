@@ -36,7 +36,7 @@ bootRepackage {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-social-twitter")
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    //compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.webjars:jquery:2.1.3")
     compile("org.webjars:bootstrap:3.3.1")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
