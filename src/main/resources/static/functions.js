@@ -1,17 +1,39 @@
+var ws;
+var client;
+var subscription;
+
 $(document).ready(function() {
-	//console.log("hola");
+	connection();
 	registerSearch();
 });
+
+function connection() {
+	ws = new SockJS("/twitter");
+	client = Stomp.over(ws);
+	
+	var headers = {};
+	var connectCallback = {};
+	client.connect(headers, connectCallback);
+}
 
 function registerSearch() {
 	$("#search").submit(function(ev){
 		event.preventDefault();
-		$.get($(this).attr('action'), {q: $("#q").val()}, function(data) {
-			//$("#resultsBlock").empty().append(data);
-			var plantilla = $('#plantillaTwitter').html();
-    		var html = Mustache.to_html(plantilla, data);
-    		$("#resultsBlock").empty().append(html);
-		});	
 		
+		//al realizar una búsqueda, cancelamos la suscripción anterior, si la hay
+		if(subscription != undefined){
+			subscription.unsubscribe();
+			 $("#respuesta").empty();
+		}
+		
+		var query = $("#q").val();
+		client.send("/app/search", {}, query);
+		subscription = client.subscribe("/queue/search/" + query, function(mensaje) {
+		    // called when the client receives a STOMP message from the server
+			var data = JSON.parse(mensaje.body);	
+			var template = $('#plantillaTweets').html();
+		    var info = Mustache.to_html(template, data);
+		    $("#respuesta").prepend(info);
+		}, {id: query});
 	});
 }

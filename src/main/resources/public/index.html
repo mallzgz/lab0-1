@@ -24,27 +24,7 @@
     <script th:src="@{/functions.js}" src="../functions.js"></script>
     <script th:src="@{/mustache.js}" src="../mustache.js"></script> 
     <script src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
-	<script src="stomp.js"></script>
-    <!-- Plantilla de mustache creada para mostrar todos los tuits -->
-   
-    <script id="plantillaTwitter" type="text/template">
-		{{#tweets}}
-		<div class="row panel panel-default" th:fragment="content">
-    		<div class="panel-heading">
-        		<a href="https://twitter.com/{{fromUser}}" th:href:"https://twitter.com/{{fromUser}}"
-           			target="_blank"><b th:text="@{{fromUser}}">{{fromUser}}</b></a>
-        		<div class="pull-right">
-            	<a href="https://twitter.com/{{fromUser}}/status/{{idStr}}"
-               		th:href="https://twitter.com/{{fromUser}}/status/{{idStr}}"
-               		target="_blank"><span class="glyphicon glyphicon-link"></span></a>
-        		</div>
-    		</div>
-    		<div class="panel-body" th:text={{unmodifiedText}}>{{unmodifiedText}}
-    		</div>
-		</div>
-		{{/tweets}}
-	</script>
-	
+	<script src="stomp.js"></script>  
 	
     <!-- Latest compiled and minified JavaScript -->
 </head>
@@ -76,6 +56,24 @@
     </form>
     <div class="row">&nbsp;</div>
     <div id="resultsBlock"></div>
+    <div class="row">&nbsp;</div>
+    <div id="respuesta"></div>
+	<script id="plantillaTweets" type="x-tmpl-mustache">
+		<div class="row panel panel-default" th:fragment="content">
+    		<div class="panel-heading">
+        		<a href="https://twitter.com/{{fromUser}}" th:href:"https://twitter.com/{{fromUser}}"
+           			target="_blank"><b th:text="@{{fromUser}}">{{fromUser}}</b></a>
+        		<div class="pull-right">
+            	<a href="https://twitter.com/{{fromUser}}/status/{{idStr}}"
+               		th:href="https://twitter.com/{{fromUser}}/status/{{idStr}}"
+               		target="_blank"><span class="glyphicon glyphicon-link"></span></a>
+        		</div>
+    		</div>
+    		<div class="panel-body" th:text={{unmodifiedText}}>{{unmodifiedText}}
+    		</div>
+		</div>
+	</script>	
+</div>
 </div>
 </body>
 </html>
