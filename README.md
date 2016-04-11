@@ -4,7 +4,7 @@ Página web de Heroku donde esta alojado el programa:
 
 https://fierce-hollows-86862.herokuapp.com/
 
-# lab0
+# lab1
 
 Página web de Heroku donde esta alojado el programa:
 
